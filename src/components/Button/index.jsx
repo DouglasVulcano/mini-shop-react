@@ -1,34 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
-import {
-  increment,
-  decrement,
-  clearCounter,
-} from "../../store/slices/counterSlice";
-import { useDispatch } from "react-redux";
 
-export default function Button({ title, actionType }) {
-  const dispatch = useDispatch();
-
-  const handleClick = (type) => {
-    switch (type) {
-      case "add":
-        dispatch(increment());
-        break;
-      case "remove":
-        dispatch(decrement());
-        break;
-      case "clear":
-        dispatch(clearCounter());
-        break;
-      default:
-        break;
-    }
-  };
-
+const Button = ({ onClick, bgColor, children }) => {
   return (
-    <button className={styles.btn} onClick={() => handleClick(actionType)}>
-      {title}
+    <button
+      onClick={onClick}
+      className={styles.button}
+      style={{ backgroundColor: bgColor }}
+    >
+      {children}
     </button>
   );
-}
+};
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  bgColor: PropTypes.string,
+};
+
+export default Button;
