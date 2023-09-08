@@ -1,17 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import ProductPage from "../pages/ProductPage";
-import IndexPage from "../pages/IndexPage";
-import CartPage from "../pages/CartPage";
+import CartPage from "../modules/cart/CartPage";
+
+import productRoutes from "../modules/product/routes";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <IndexPage />,
-  },
-  {
-    path: "/product/:id",
-    element: <ProductPage />,
-  },
+  ...productRoutes,
   {
     path: "/cart",
     element: <CartPage />,
