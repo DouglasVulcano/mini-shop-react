@@ -9,6 +9,7 @@ module.exports = {
           "@components": "./components",
           "@services": "./services",
           "@features": "./features",
+          "@modules": "./modules",
         },
       },
     ],

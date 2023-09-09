@@ -1,15 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import CartPage from "../modules/cart/CartPage";
 
-import productRoutes from "../modules/product/routes";
+import productRoutes from "modules/product/routes";
+import cartRoutes from "modules/cart/routes";
 import NotFound from "modules/notFound/NotFoundPage";
 
 const router = createBrowserRouter([
   ...productRoutes,
-  {
-    path: "/cart",
-    element: <CartPage />,
-  },
+  ...cartRoutes,
   {
     path: "*",
     element: <NotFound />,

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.scss";
 
 import { setProduct } from "@features/products/productSlice";
+import { setSelecteds } from "@features/cart/cartSlice";
 import productService from "@services/ProductService";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import Button from "@components/Button";
+
 import { FaCartPlus, FaMoneyBills } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import Button from "@components/Button";
 
 const iconsConf = {
   size: "14px",
@@ -14,21 +17,39 @@ const iconsConf = {
 };
 
 export default function ProductPage() {
+  const [quantity, setState] = useState(1);
+
   const route = useLocation(),
     id = route.pathname.split("/")[2];
 
   const dispatch = useDispatch(),
     product = useSelector((state) => state.products.selectedProduct);
 
+  const redirect = useNavigate();
+
+  const addToCart = () => {
+    if (quantity <= 0) {
+      alert("Selecione uma quantidade válida!");
+      return;
+    }
+    dispatch(setSelecteds({ product, quantity }));
+  };
+
   useEffect(() => {
     async function fetchProduct(id) {
       const response = await productService.getById(id),
         { data } = response;
+
+      if (!data) {
+        redirect("/404");
+        return;
+      }
+
       dispatch(setProduct(data));
     }
 
     fetchProduct(id);
-  }, [dispatch, route, id]);
+  }, [dispatch, route, id, redirect]);
 
   return (
     product && (
@@ -62,6 +83,17 @@ export default function ProductPage() {
               receba o produto que está esperando ou devolvemos o dinheiro.
             </span>
           </div>
+          <div>
+            <strong>Quantidade: </strong>
+            <input
+              min="1"
+              type="number"
+              value={quantity}
+              className={styles.quantityInput}
+              onChange={(e) => setState(e.target.value)}
+            />
+          </div>
+
           <Button
             bgColor="#f37121"
             onClick={() => alert("Compra efetuada com sucesso!")}
@@ -69,7 +101,7 @@ export default function ProductPage() {
             <FaMoneyBills {...iconsConf} />
             Comprar agora
           </Button>
-          <Button bgColor="#707070">
+          <Button bgColor="#707070" onClick={() => addToCart()}>
             <FaCartPlus {...iconsConf} />
             Adicionar ao carrinho
           </Button>
