@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./CartCard.module.scss";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export default function CartCard({
   id,
@@ -11,6 +12,8 @@ export default function CartCard({
   quantity,
   onRemove,
 }) {
+  const navigate = useNavigate();
+
   const formatDescription = (description) => {
     return description.length > 100
       ? `${description.substring(0, 100)}...`
@@ -18,7 +21,10 @@ export default function CartCard({
   };
 
   return (
-    <div className={styles.cart_card}>
+    <div
+      className={styles.cart_card}
+      onClick={() => navigate(`/product/${id}`)}
+    >
       <button className={styles.remove_button} onClick={() => onRemove(id)}>
         X
       </button>

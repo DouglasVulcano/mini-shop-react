@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./CartPage.module.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { removeSelecteds } from "@features/cart/cartSlice";
 import CartCard from "../components/CartCard";
+
+import { useCart } from "@hooks/useCart";
+import { useSelector } from "react-redux";
 
 export default function CartPage() {
   const selecteds = useSelector((state) => state.cart.selecteds);
-  const dispatch = useDispatch();
+
+  const cart = useCart();
 
   return (
     <div>
@@ -16,7 +18,7 @@ export default function CartPage() {
             <CartCard
               key={prod.id}
               {...prod}
-              onRemove={(id) => dispatch(removeSelecteds(id))}
+              onRemove={(id) => cart.removeFromCart(id)}
             />
           ))
         ) : (

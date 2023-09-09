@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa"; // Importe o ícone de carrinho
-import styles from "./Navbar.module.scss"; // Importe os estilos
+import { FaShoppingCart } from "react-icons/fa";
+import styles from "./Navbar.module.scss";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {

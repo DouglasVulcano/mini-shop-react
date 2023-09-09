@@ -8,6 +8,7 @@ module.exports = function override(config, env) {
     "@services": path.resolve(__dirname, "src/services"),
     "@features": path.resolve(__dirname, "src/features"),
     "@modules": path.resolve(__dirname, "src/modules"),
+    "@hooks": path.resolve(__dirname, "src/hooks"),
   };
 
   return config;

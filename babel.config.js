@@ -10,6 +10,7 @@ module.exports = {
           "@services": "./services",
           "@features": "./features",
           "@modules": "./modules",
+          "@hooks": "./hooks",
         },
       },
     ],
