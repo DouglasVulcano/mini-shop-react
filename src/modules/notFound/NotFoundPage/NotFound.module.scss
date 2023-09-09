@@ -1,0 +1,34 @@
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+
+  .errorIcon {
+    font-size: 3rem;
+    color: #f00;
+  }
+
+  .errorMessage {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+
+  .errorDescription {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+
+  .backLink {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 10px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,14 +1,23 @@
-import IndexPage from "./IndexPage";
+import MainLayout from "layouts/MainLayout";
+import IndexPage from "./ProductsPage";
 import ProductPage from "./ProductPage";
 
 const routes = [
   {
     path: "/",
-    element: <IndexPage />,
+    element: (
+      <MainLayout>
+        <IndexPage />
+      </MainLayout>
+    ),
   },
   {
     path: "/product/:id",
-    element: <ProductPage />,
+    element: (
+      <MainLayout>
+        <ProductPage />
+      </MainLayout>
+    ),
   },
 ];
 
